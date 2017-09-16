@@ -1,4 +1,4 @@
-package com.demo.mdb.pokedex;
+package com.example.nzp.pokedex;
 
 import android.util.Log;
 
