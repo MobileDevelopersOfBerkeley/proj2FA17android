@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Button;
 
 import java.lang.reflect.Array;
@@ -32,7 +33,7 @@ public class PokedexHome extends AppCompatActivity {
         pokemons = pokedex.getPokemon();
 
         pokemonListAdapter = new PokemonAdapter(getApplicationContext(), pokemons);
-
+        pokemonList.setAdapter(pokemonListAdapter);
 
 
     }

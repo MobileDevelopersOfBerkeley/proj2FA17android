@@ -1,6 +1,7 @@
 package com.example.joey.pokedex;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +9,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
  * Created by joey on 9/17/17.
  */
 
-public class PokemonAdapter extends RecyclerView.Adapter {
+public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonListViewHolder> {
 
     Context context;
     ArrayList<Pokedex.Pokemon> pokemons = new ArrayList<>();
@@ -35,6 +40,9 @@ public class PokemonAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(PokemonListViewHolder holder, int position) {
         Pokedex.Pokemon pokemon = pokemons.get(position);
         holder.pokemonName.setText(pokemon.name);
+        String portraitString = "http://assets.pokemon.com/assets/cms2/img/pokedex/full/" + pokemon.number +".png";
+        Glide.with(context).load(portraitString).into(holder.portrait);
+
 
     }
 
@@ -53,6 +61,6 @@ public class PokemonAdapter extends RecyclerView.Adapter {
             portrait = (ImageView) v.findViewById(R.id.profile);
         }
 
-
     }
+
 }
