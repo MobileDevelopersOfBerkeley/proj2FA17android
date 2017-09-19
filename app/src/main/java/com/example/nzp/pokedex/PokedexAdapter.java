@@ -20,16 +20,19 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.CustomVi
 
     private Context context;
     private ArrayList<Pokedex.Pokemon> pokemonArrayList;
+    private DisplayStyle displayStyle;
 
-    public PokedexAdapter(Context context, ArrayList<Pokedex.Pokemon> pokemonArrayList) {
+    public PokedexAdapter(Context context, ArrayList<Pokedex.Pokemon> pokemonArrayList, DisplayStyle displayStyle) {
         this.context = context;
         this.pokemonArrayList = pokemonArrayList;
+        this.displayStyle = displayStyle;
     }
 
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_view, parent, false);
+        int layoutId = (displayStyle == DisplayStyle.LIST) ? R.layout.row_view : R.layout.grid_view;
+        View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
         return new CustomViewHolder(view);
     }
 
@@ -37,8 +40,8 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.CustomVi
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         final Pokedex.Pokemon pokemon = pokemonArrayList.get(position);
         String filename = "http://assets.pokemon.com/assets/cms2/img/pokedex/full/" + pokemon.number + ".png";
-        Picasso.with(context).load(filename).into(holder.rowViewImage);
-        holder.rowViewText.setText(pokemon.name);
+        Picasso.with(context).load(filename).into(holder.listImageView);
+        holder.listTextView.setText(pokemon.name);
     }
 
     @Override
@@ -48,13 +51,13 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.CustomVi
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView rowViewImage;
-        TextView rowViewText;
+        ImageView listImageView;
+        TextView listTextView;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
-            rowViewImage = itemView.findViewById(R.id.rowViewImage);
-            rowViewText = itemView.findViewById(R.id.rowViewText);
+            listImageView = itemView.findViewById(R.id.listImageView);
+            listTextView = itemView.findViewById(R.id.listTextView);
 
         }
     }
