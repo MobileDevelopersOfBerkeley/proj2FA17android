@@ -19,5 +19,11 @@ public enum DisplayStyle {
         return LIST;
     }
 
-
+    @Override
+    public String toString() {
+        if (this == LIST) {
+            return "Grid";
+        }
+        return "List";
+    }
 }
