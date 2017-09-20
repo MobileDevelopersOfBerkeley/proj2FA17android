@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonListViewHolder> {
 
     Context context;
-    ArrayList<Pokedex.Pokemon> pokemons = new ArrayList<>();
+    public ArrayList<Pokedex.Pokemon> pokemons = new ArrayList<>();
 
     //need to update with information
     public PokemonAdapter(Context context, ArrayList<Pokedex.Pokemon> pokemons){

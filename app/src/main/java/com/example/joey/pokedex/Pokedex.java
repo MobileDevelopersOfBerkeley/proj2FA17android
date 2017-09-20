@@ -41,7 +41,7 @@ public class Pokedex {
         String hp;
         String species;
 
-        public Pokemon(String name, JSONObject jsonData) {
+        public Pokemon(String name, JSONObject jsonData){
             try {
                 this.name = name;
                 number = jsonData.getString("#").trim();
