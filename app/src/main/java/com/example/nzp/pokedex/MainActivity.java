@@ -6,15 +6,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -26,6 +23,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView recyclerView;
     private PokedexAdapter adapter;
     private DisplayStyle displayStyle = DisplayStyle.LIST;
+
+    //Menu variables
+    private Menu menu;
+    private SearchView searchView;
 
     //Filter view variables
     private View filterInfoView;
@@ -71,12 +72,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        search((SearchView) menu.findItem(R.id.searchButton).getActionView());
+        searchView = (SearchView) menu.findItem(R.id.searchButton).getActionView();
         return true;
     }
 
-    private void search(SearchView searchView) {
+    private void setSearch() {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -89,6 +91,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
+    }
+
+    private void clearSearch() {
+        searchView.setOnQueryTextListener(null);
+        (menu.findItem(R.id.searchButton)).collapseActionView();
+    }
+
+    private void setFilterText(String text) {
+        if (text == null) {
+            filterInfoView.setVisibility(View.GONE);
+            return;
+        }
+        filterText.setText(text);
+        filterInfoView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -105,17 +121,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 changeDisplayStyle(displayStyle);
                 return true;
             case R.id.randomButton:
-                adapter.getRandomPokemon(NUM_RANDOM_POKEMON);
+                int numPokemon = adapter.getRandomPokemon(NUM_RANDOM_POKEMON);
+                setFilterText("Showing " + numPokemon + " random pokemon.");
+                clearSearch();
                 break;
             case R.id.filterButton:
                 //TODO: Filter screen that properly calls adapter.filterPokemon and updates text.
                 HashSet<Pokemon.Type> testSet = new HashSet<>();
-                testSet.add(Pokemon.Type.WATER);
-                testSet.add(Pokemon.Type.GRASS);
-                PokedexFilter filter = new PokedexFilter(testSet, 0, 0, 0);
+                testSet.add(Pokemon.Type.ELECTRIC);
+                PokedexFilter filter = new PokedexFilter(testSet, 30, 0, 0);
                 adapter.filterPokemon(filter);
-                filterText.setText(filter.toString());
-                filterInfoView.setVisibility(View.VISIBLE);
+                setFilterText(filter.toString());
+                clearSearch();
+                break;
+            case R.id.searchButton:
+                setSearch();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -126,8 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.removeFilterImage:
                 PokedexFilter allFilter = new PokedexFilter();
                 adapter.filterPokemon(allFilter);
-                filterText.setText(allFilter.toString());
-                filterInfoView.setVisibility(View.GONE);
+                setFilterText(null);
                 break;
         }
     }

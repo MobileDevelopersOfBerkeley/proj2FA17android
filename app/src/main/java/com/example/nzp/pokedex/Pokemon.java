@@ -37,11 +37,11 @@ public class Pokemon {
 
             //Additional code to support types
             String types = jsonData.getString("Type").trim();
-            String[] typeString = types.substring(1, types.length() - 1).split(","); //split into array of types
+            String[] typeString = types.substring(1, types.length() - 1).split(","); //split into array of type strings
             type = new Type[typeString.length];
             for (int i = 0; i < typeString.length; i += 1) {
-                typeString[i] = typeString[i].substring(1, typeString[i].length() - 1); //remove "" around each type
-                type[i] = Type.valueOf(typeString[i].toUpperCase());
+                typeString[i] = typeString[i].substring(1, typeString[i].length() - 1); //remove "" around each type string
+                type[i] = Type.valueOf(typeString[i].toUpperCase()); //convert each string to type and add to array
             }
 
         } catch (JSONException e) {

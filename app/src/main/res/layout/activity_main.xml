@@ -16,7 +16,10 @@
         android:orientation="horizontal"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintRight_creator="1"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintLeft_toLeftOf="parent">
 
         <TextView
             android:id="@+id/filterText"

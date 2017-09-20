@@ -91,13 +91,14 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.CustomVi
         return truePokemon;
     }
 
-    public void getRandomPokemon(int n) {
+    public int getRandomPokemon(int n) {
         ArrayList<Pokemon> randomPokemon = new ArrayList<>(filteredPokemon);
         Collections.shuffle(randomPokemon);
         if (n >= randomPokemon.size()) {
             n = randomPokemon.size();
         }
         setData(new ArrayList<>(randomPokemon.subList(0, n)));
+        return n;
     }
 
     public void setData(ArrayList<Pokemon> newData) {

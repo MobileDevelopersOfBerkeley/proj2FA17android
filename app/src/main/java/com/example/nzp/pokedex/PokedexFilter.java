@@ -22,7 +22,7 @@ public class PokedexFilter {
 
     /* Empty constructor filters nothing. */
     public PokedexFilter() {
-        this(ALL_TYPES, -1, -1, -1);
+        this(ALL_TYPES, 0, 0, 0);
     }
 
     public PokedexFilter(Set<Pokemon.Type> allowedTypes, int minAtk, int minDef, int minHP) {
@@ -51,9 +51,9 @@ public class PokedexFilter {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        boolean atkFiltered = getMinAtk() > -1;
-        boolean defFiltered = getMinDef() > -1;
-        boolean hpFiltered = getMinHP() > -1;
+        boolean atkFiltered = getMinAtk() > 0;
+        boolean defFiltered = getMinDef() > 0;
+        boolean hpFiltered = getMinHP() > 0;
         int numTypes = getAllowedTypes().size();
 
         //Type filters
@@ -71,13 +71,13 @@ public class PokedexFilter {
 
         //ATK, DEF, and HP filters
         if (atkFiltered) {
-            builder.append(", ATK > ").append(getMinAtk());
+            builder.append(", ATK ≥ ").append(getMinAtk());
         }
         if (defFiltered) {
-            builder.append(", DEF > ").append(getMinDef());
+            builder.append(", DEF ≥ ").append(getMinDef());
         }
         if (hpFiltered) {
-            builder.append(", HP > ").append(getMinHP());
+            builder.append(", HP ≥ ").append(getMinHP());
         }
 
         builder.append(".");
