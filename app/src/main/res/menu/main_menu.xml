@@ -4,10 +4,16 @@
 
     <item
         android:id="@+id/searchButton"
-        app:actionViewClass="android.support.v7.widget.SearchView"
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
+    <item
+        android:id="@+id/filterButton"
+        android:title="Filter" />
+    <item
+        android:id="@+id/randomButton"
+        android:title="@string/show_random_20" />
     <item
         android:id="@+id/displayMenuButton"
         android:checkable="false"

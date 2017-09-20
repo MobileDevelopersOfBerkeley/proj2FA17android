@@ -19,6 +19,7 @@ public enum DisplayStyle {
         return LIST;
     }
 
+    /* Return string representation. */
     @Override
     public String toString() {
         if (this == LIST) {

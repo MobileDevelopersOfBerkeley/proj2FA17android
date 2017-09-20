@@ -32,29 +32,4 @@ public class Pokedex {
         return pokemons;
     }
 
-    public class Pokemon {
-
-        String name;
-        String number;
-        String attack;
-        String defense;
-        String hp;
-        String species;
-
-        public Pokemon(String name, JSONObject jsonData) {
-            try {
-                this.name = name;
-                number = jsonData.getString("#").trim();
-                attack = jsonData.getString("Attack").trim();
-                defense = jsonData.getString("Defense").trim();
-                hp = jsonData.getString("HP").trim();
-                species = jsonData.getString("Species").trim();
-
-            } catch (JSONException e) {
-                Log.i("JSON error", "error parsing json data");
-            }
-        }
-
-    }
-
 }

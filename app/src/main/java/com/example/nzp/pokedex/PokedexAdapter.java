@@ -13,22 +13,29 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by nzp on 9/19/17.
+ *
+ * PokedexAdapter adapts the Pokemon data from Pokedex.java and makes it easy to display and filter
+ * in a RecyclerView.
  */
 
 public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.CustomViewHolder> implements Filterable {
 
+
+    public static final ArrayList<Pokemon> ALL_POKEMON = new Pokedex().getPokemon();
+
     private Context context;
-    private ArrayList<Pokedex.Pokemon> allPokemon;
-    private ArrayList<Pokedex.Pokemon> filteredPokemon;
+    private ArrayList<Pokemon> filteredPokemon;
+    private ArrayList<Pokemon> truePokemon;
     private DisplayStyle displayStyle;
 
-    public PokedexAdapter(Context context, ArrayList<Pokedex.Pokemon> allPokemon, ArrayList<Pokedex.Pokemon> filteredPokemon, DisplayStyle displayStyle) {
+    public PokedexAdapter(Context context, ArrayList<Pokemon> filteredPokemon, ArrayList<Pokemon> truePokemon, DisplayStyle displayStyle) {
         this.context = context;
-        this.allPokemon = allPokemon;
-        this.filteredPokemon = filteredPokemon;
+        this.filteredPokemon = filteredPokemon == null ? new ArrayList<>(ALL_POKEMON) : filteredPokemon;
+        this.truePokemon = truePokemon == null ? new ArrayList<>(this.filteredPokemon) : truePokemon;
         this.displayStyle = displayStyle;
     }
 
@@ -42,7 +49,7 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.CustomVi
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        final Pokedex.Pokemon pokemon = filteredPokemon.get(position);
+        Pokemon pokemon = truePokemon.get(position);
         String filename = "http://assets.pokemon.com/assets/cms2/img/pokedex/full/" + pokemon.number + ".png";
         Picasso.with(context).load(filename).into(holder.listImageView);
         holder.listTextView.setText(pokemon.name + " #" + pokemon.number);
@@ -50,20 +57,51 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.CustomVi
 
     @Override
     public int getItemCount() {
-        return filteredPokemon.size();
+        return truePokemon.size();
     }
 
     @Override
     public Filter getFilter() {
-        return new PokedexFilter(this, allPokemon);
+        return new PokedexSearchFilter(this, filteredPokemon);
     }
 
-    public ArrayList<Pokedex.Pokemon> getFilteredPokemon() {
+    public void filterPokemon(PokedexFilter filter) {
+        filteredPokemon = new ArrayList<>();
+        for (Pokemon pokemon : ALL_POKEMON) {
+            int mAtk = Integer.valueOf(pokemon.attack);
+            int mDef = Integer.valueOf(pokemon.defense);
+            int mHP = Integer.valueOf(pokemon.hp);
+            if (mAtk >= filter.getMinAtk() && mDef >= filter.getMinDef() && mHP >= filter.getMinHP()) {
+                for (int i = 0; i < pokemon.type.length; i += 1) {
+                    if (filter.getAllowedTypes().contains(pokemon.type[i])) {
+                        filteredPokemon.add(pokemon);
+                        break;
+                    }
+                }
+            }
+        }
+        setData(filteredPokemon);
+    }
+
+    public ArrayList<Pokemon> getFilteredPokemon() {
         return filteredPokemon;
     }
 
-    public void setData(ArrayList<Pokedex.Pokemon> newData) {
-        filteredPokemon = newData;
+    public ArrayList<Pokemon> getTruePokemon() {
+        return truePokemon;
+    }
+
+    public void getRandomPokemon(int n) {
+        ArrayList<Pokemon> randomPokemon = new ArrayList<>(filteredPokemon);
+        Collections.shuffle(randomPokemon);
+        if (n >= randomPokemon.size()) {
+            n = randomPokemon.size();
+        }
+        setData(new ArrayList<>(randomPokemon.subList(0, n)));
+    }
+
+    public void setData(ArrayList<Pokemon> newData) {
+        truePokemon = newData;
         notifyDataSetChanged();
     }
 
