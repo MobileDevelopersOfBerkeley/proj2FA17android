@@ -1,5 +1,6 @@
 package com.example.joey.pokedex;
 
+import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import java.lang.reflect.Array;
@@ -23,6 +25,9 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
     private RecyclerView.LayoutManager pokemonListLayout;
     private Pokedex pokedex = new Pokedex();
     final private ArrayList<Pokedex.Pokemon> pokemonsMaster = pokedex.getPokemon();
+    private Button typeFilterButton;
+    private Button hpFilterButton;
+    private Button randomButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,17 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
         pokemonListAdapter = new PokemonAdapter(getApplicationContext(), pokemonsMaster);
         pokemonList.setAdapter(pokemonListAdapter);
 
+        typeFilterButton = (Button) findViewById(R.id.typeFilterButton);
+        hpFilterButton = (Button) findViewById(R.id.hpFilterButton);
+        randomButton = (Button) findViewById(R.id.randomButton);
+
+        typeFilterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent typeOptions = new Intent(getApplicationContext(), TypeFilter.class);
+                startActivity(typeOptions);
+            }
+        });
 
     }
 
