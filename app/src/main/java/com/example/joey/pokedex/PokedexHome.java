@@ -60,7 +60,6 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
                 startActivityForResult(typeOptions, TYPE_REQUEST);
             }
         });
-
     }
 
     @Override
