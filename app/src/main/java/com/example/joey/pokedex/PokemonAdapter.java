@@ -1,13 +1,16 @@
 package com.example.joey.pokedex;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -15,6 +18,8 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by joey on 9/17/17.
@@ -31,8 +36,28 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonL
         this.pokemons = new ArrayList<Pokedex.Pokemon>(pokemons);
     }
 
-    public PokemonAdapter.PokemonListViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public PokemonAdapter.PokemonListViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.pokemon_row, parent, false);
+
+        final PokemonListViewHolder holder = new PokemonAdapter.PokemonListViewHolder(v);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Context context = v.getContext();
+                int duration = Toast.LENGTH_SHORT;
+                CharSequence text = "hello";
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                Intent intentProfile = new Intent(v.getContext(),PokeProfile.class);
+                v.startActivity(intentProfile);
+            }
+        });
+        //return
+
         return new PokemonListViewHolder(v);
     }
 
