@@ -2,6 +2,8 @@ package com.example.joey.pokedex;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by swetha on 9/21/17.
@@ -9,11 +11,22 @@ import android.support.v7.app.AppCompatActivity;
 
 public class PokeProfile extends AppCompatActivity
 {
+    TextView pokeName,pokeSpecies,pokeHP,pokeType;
+    TextView attack,defense,spAttack,spDefense,speed,total,flavortext;
+    Button websearchbutton;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pokeprofile);
+
+        pokeName = (TextView) findViewById(R.id.attack);
+        pokeSpecies = (TextView)findViewById(R.id.pokeSpecies);
+        pokeHP = (TextView) findViewById(R.id.pokeHP);
+        pokeType = (TextView) findViewById(R.id.pokeType);
+
+        attack = (TextView) findViewById(R.id.attack);
+        defense = (TextView)
     }
 }
 
