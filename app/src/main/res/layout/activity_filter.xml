@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nzp.pokedex.FilterActivity">
+
+    <SeekBar
+        android:id="@+id/seekBarAtk"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/minAtkText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintTop_toTopOf="@+id/minAtkText"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/minAtkText"
+        android:layout_marginBottom="0dp" />
+
+    <SeekBar
+        android:id="@+id/seekBarDef"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/minDefText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintTop_toTopOf="@+id/minDefText"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/minDefText"
+        android:layout_marginBottom="0dp" />
+
+    <SeekBar
+        android:id="@+id/seekBarHP"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/minHPText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintTop_toTopOf="@+id/minHPText"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/minHPText"
+        android:layout_marginBottom="0dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        tools:layout_editor_absoluteX="122dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/minDefText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="Min DEF: 0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/minAtkText" />
+
+    <TextView
+        android:id="@+id/minHPText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="Min HP: 0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/minDefText" />
+
+    <TextView
+        android:id="@+id/minAtkText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="Min ATK: 0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="24dp" />
+
+</android.support.constraint.ConstraintLayout>

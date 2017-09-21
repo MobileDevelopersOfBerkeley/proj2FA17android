@@ -69,14 +69,18 @@ public class PokedexFilter {
             builder.append("Showing ").append(numTypes).append(" types");
         }
 
-        //ATK, DEF, and HP filters
-        if (atkFiltered) {
+        int numFilteredStats = (atkFiltered ? 1 : 0) + (defFiltered ? 1 : 0) + (hpFiltered ? 1 : 0);
+
+        //Handle ATK, DEF, and HP filters
+        if (numFilteredStats == 3) { //all 3 are true
+            builder.append(", filtered by 3 stats");
+        } else if (numFilteredStats == 2) { //exactly 2 are true
+            builder.append(", filtered by 2 stats");
+        } else if (atkFiltered) {
             builder.append(", ATK ≥ ").append(getMinAtk());
-        }
-        if (defFiltered) {
+        } else if (defFiltered) {
             builder.append(", DEF ≥ ").append(getMinDef());
-        }
-        if (hpFiltered) {
+        } else if (hpFiltered) {
             builder.append(", HP ≥ ").append(getMinHP());
         }
 

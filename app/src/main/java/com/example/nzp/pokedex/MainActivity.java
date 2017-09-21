@@ -1,11 +1,13 @@
 package com.example.nzp.pokedex;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.HashSet;
+import java.util.logging.Filter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -126,6 +129,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 clearSearch();
                 break;
             case R.id.filterButton:
+                startActivityForResult(new Intent(this, FilterActivity.class), 1);
+                /*
                 //TODO: Filter screen that properly calls adapter.filterPokemon and updates text.
                 HashSet<Pokemon.Type> testSet = new HashSet<>();
                 testSet.add(Pokemon.Type.ELECTRIC);
@@ -133,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 adapter.filterPokemon(filter);
                 setFilterText(filter.toString());
                 clearSearch();
+                */
                 break;
             case R.id.searchButton:
                 setSearch();
@@ -149,6 +155,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 adapter.filterPokemon(allFilter);
                 setFilterText(null);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                int atk = data.getIntExtra("atk", -1);
+                int def = data.getIntExtra("def", -1);
+                int hp = data.getIntExtra("hp", -1);
+                HashSet<Pokemon.Type> testSet = new HashSet<>();
+                testSet.add(Pokemon.Type.ELECTRIC);
+                PokedexFilter filter = new PokedexFilter(testSet, atk, def, hp);
+                adapter.filterPokemon(filter);
+                setFilterText(filter.toString());
+                clearSearch();
+            }
         }
     }
 }

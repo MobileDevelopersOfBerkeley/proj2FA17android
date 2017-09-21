@@ -3,4 +3,7 @@
     <string name="search">Search</string>
     <string name="display_as">Display as</string>
     <string name="show_random_20">Show Random 20</string>
+    <string name="min_atk">Min ATK: %d</string>
+    <string name="min_def">Min DEF: %d</string>
+    <string name="min_hp">Min HP: %d</string>
 </resources>
