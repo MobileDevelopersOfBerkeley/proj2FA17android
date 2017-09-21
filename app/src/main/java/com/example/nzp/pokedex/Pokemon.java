@@ -24,6 +24,11 @@ public class Pokemon {
     String defense;
     String hp;
     String species;
+    String specialAttack;
+    String specialDefense;
+    String typeProfile;
+    String speed;
+    String total;
     Type[] type;
 
     public Pokemon(String name, JSONObject jsonData) {
@@ -34,6 +39,12 @@ public class Pokemon {
             defense = jsonData.getString("Defense").trim();
             hp = jsonData.getString("HP").trim();
             species = jsonData.getString("Species").trim();
+            specialAttack = jsonData.getString("Sp. Atk").trim();
+            specialDefense = jsonData.getString("Sp. Def").trim();
+            typeProfile = jsonData.getString("Type").trim();
+            speed = jsonData.getString("Speed").trim();
+            total = jsonData.getString("Total").trim();
+
 
             //Additional code to support types
             String types = jsonData.getString("Type").trim();

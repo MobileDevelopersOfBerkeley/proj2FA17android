@@ -29,7 +29,6 @@ public class Pokedex {
         } catch (JSONException e) {
             Log.i("JSON error", "error parsing json data");
         }
-
         return pokemons;
     }
 

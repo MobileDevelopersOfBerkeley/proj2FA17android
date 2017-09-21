@@ -1,6 +1,7 @@
 package com.example.nzp.pokedex;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,10 +50,18 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.CustomVi
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        Pokemon pokemon = truePokemon.get(position);
+        final Pokemon pokemon = truePokemon.get(position);
         String filename = "http://assets.pokemon.com/assets/cms2/img/pokedex/full/" + pokemon.number + ".png";
         Picasso.with(context).load(filename).into(holder.listImageView);
         holder.listTextView.setText(pokemon.name + " #" + pokemon.number);
+        holder.listParentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PokemonDisplay.class);
+                intent.putExtra("number", pokemon.number);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -108,11 +117,13 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.CustomVi
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
+        View listParentView;
         ImageView listImageView;
         TextView listTextView;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
+            listParentView = itemView.findViewById(R.id.listParentView);
             listImageView = itemView.findViewById(R.id.listImageView);
             listTextView = itemView.findViewById(R.id.listTextView);
 
