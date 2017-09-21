@@ -16,10 +16,12 @@ import android.widget.Button;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class PokedexHome extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
+    static final int TYPE_REQUEST = 7;
     private RecyclerView pokemonList;
     private PokemonAdapter pokemonListAdapter;
     private RecyclerView.LayoutManager pokemonListLayout;
@@ -28,6 +30,10 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
     private Button typeFilterButton;
     private Button hpFilterButton;
     private Button randomButton;
+    final private ArrayList<String> allowedTypesMaster = new ArrayList<String>(Arrays.asList("normal", "fighting", "flying", "poison",
+            "ground", "rock", "bug", "ghost", "steel", "fire", "water", "grass", "electric", "psychic", "ice",
+            "dragon", "dark", "fairy"));
+    public ArrayList<String> allowedTypes = new ArrayList<String>(allowedTypesMaster);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +56,36 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
             @Override
             public void onClick(View view) {
                 Intent typeOptions = new Intent(getApplicationContext(), TypeFilter.class);
-                startActivity(typeOptions);
+                typeOptions.putStringArrayListExtra("allowedTypes", allowedTypes);
+                startActivityForResult(typeOptions, TYPE_REQUEST);
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ArrayList<Pokedex.Pokemon> newPokemons= updatePokemonListByType(pokemonListAdapter.pokemons);
+        pushNewPokemonList(newPokemons);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 7){
+            if(resultCode == RESULT_OK){
+                allowedTypes = data.getStringArrayListExtra("allowedTypes");
+                //ArrayList<Pokedex.Pokemon> newPokemons= updatePokemonListByType(pokemonListAdapter.pokemons);
+                //pushNewPokemonList(newPokemons);
+            }
+        }
+    }
+
+    public void pushNewPokemonList(ArrayList<Pokedex.Pokemon> newPokemons){
+        pokemonListAdapter.pokemons.clear();
+        pokemonListAdapter.pokemons.addAll(newPokemons);
+        pokemonListAdapter.notifyDataSetChanged();
     }
 
     /*
@@ -72,7 +104,6 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        Log.d("CREATION", "on query text change called");
         updatePokedemsByName(newText);
         return true;
     }
@@ -89,10 +120,27 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
                 newPokemons.add(pokemon);
             }
         }
-        pokemonListAdapter.pokemons.clear();
-        pokemonListAdapter.pokemons.addAll(newPokemons);
-        Log.d("CREATION", "new pokemon list created");
-        pokemonListAdapter.notifyDataSetChanged();
+        newPokemons = updatePokemonListByType(newPokemons);
+        pushNewPokemonList(newPokemons);
+    }
+
+    public ArrayList<Pokedex.Pokemon> updatePokemonListByType(ArrayList<Pokedex.Pokemon> pokemons){
+        Log.d("CREATION", "update Pokemon by type called");
+        ArrayList<Pokedex.Pokemon> newPokemons = new ArrayList<Pokedex.Pokemon>();
+        for(Pokedex.Pokemon pokemon : pokemons){
+            Boolean add = false;
+            for(String type : pokemon.type){
+                if(allowedTypes.contains(type)){
+                    add = true;
+                    break;
+                }
+            }
+            if(add){
+                newPokemons.add(pokemon);
+            }
+        }
+        Log.d("CREATION", newPokemons.toString());
+        return newPokemons;
     }
 
 }

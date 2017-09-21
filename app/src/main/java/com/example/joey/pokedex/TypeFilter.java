@@ -1,6 +1,7 @@
 package com.example.joey.pokedex;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -15,19 +16,21 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import static android.R.attr.button;
 
 public class TypeFilter extends AppCompatActivity {
 
     private ArrayList<Button> typeButtons = new ArrayList<Button>();
     private View.OnClickListener typeButtonListener;
-    private int accentColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_filter);
-        accentColor = getThemeAccentColor(getApplicationContext());
 
         ArrayList<View> allviews = new ArrayList<View>(((ConstraintLayout) findViewById(R.id.typeButtonBin)).getTouchables());
         for(View item : allviews){
@@ -40,34 +43,63 @@ public class TypeFilter extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Button clickedButton = (Button) view;
-                int currentColorId = ((ColorDrawable) clickedButton.getBackground()).getColor();
-                if(currentColorId == accentColor){
-                    clickedButton.setBackgroundColor(Color.BLACK);
+                int currentColor = ((ColorDrawable) clickedButton.getBackground()).getColor();
+                if(currentColor == Color.RED){
+                    clickedButton.setBackgroundColor(Color.WHITE);
+                    clickedButton.setTextColor(Color.RED);
                 }else{
-                    clickedButton.setBackgroundColor(accentColor);
+                    clickedButton.setBackgroundColor(Color.RED);
+                    clickedButton.setTextColor(Color.WHITE);
                 }
             }
         };
 
-        //set listeners to all buttons
+        //set listeners and configure buttons
+        updateButtons();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putStringArrayListExtra("allowedTypes", getAllowedTypes());
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateButtons();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        updateButtons();
+    }
+
+    private void updateButtons(){
+        ArrayList<String> prevAllowedTypes = getIntent().getStringArrayListExtra("allowedTypes");
+
         for(Button button : typeButtons){
-            button.setBackgroundColor(accentColor);
+            if(prevAllowedTypes.contains(button.getText().toString())){
+                button.setBackgroundColor(Color.RED);
+                button.setTextColor(Color.WHITE);
+            }else{
+                button.setBackgroundColor(Color.WHITE);
+                button.setTextColor(Color.RED);
+            }
             button.setOnClickListener(typeButtonListener);
         }
-
     }
 
-    public static int getThemeAccentColor (final Context context) {
-        final TypedValue value = new TypedValue ();
-        context.getTheme ().resolveAttribute (R.attr.colorAccent, value, true);
-        return value.data;
+    public ArrayList<String> getAllowedTypes(){
+        ArrayList<String> types = new ArrayList<String>();
+        for(Button button : typeButtons){
+            if(((ColorDrawable) button.getBackground()).getColor() == Color.RED){
+                types.add(button.getText().toString());
+            }
+        }
+        return types;
     }
-
-
-
-
-
-
-
-
 }
