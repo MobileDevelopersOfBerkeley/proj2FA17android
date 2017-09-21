@@ -53,7 +53,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonL
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
                 Intent intentProfile = new Intent(v.getContext(),PokeProfile.class);
-                v.startActivity(intentProfile);
+                startActivity(intentProfile);
             }
         });
         //return
