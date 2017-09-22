@@ -42,8 +42,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonL
         holder.pokemonName.setText(pokemon.name);
         String portraitString = "http://assets.pokemon.com/assets/cms2/img/pokedex/full/" + pokemon.number +".png";
         Glide.with(context).load(portraitString).into(holder.portrait);
-
-
     }
 
     @Override
