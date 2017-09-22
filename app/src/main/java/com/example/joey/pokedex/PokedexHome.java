@@ -65,7 +65,6 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
                 startActivityForResult(typeOptions, TYPE_REQUEST);
             }
         });
-
         pointFilterButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -220,5 +219,4 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
         }
         return newPokemons;
     }
-
 }
