@@ -141,5 +141,4 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
         Log.d("CREATION", newPokemons.toString());
         return newPokemons;
     }
-
 }

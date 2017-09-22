@@ -1,9 +1,20 @@
 package com.example.joey.pokedex;
 
+import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 
 /**
  * Created by swetha on 9/21/17.
@@ -11,57 +22,127 @@ import android.widget.TextView;
 
 public class PokeProfile extends AppCompatActivity
 {
-    TextView pokeName,pokeSpecies,pokeHP,pokeType;
-    TextView attack,defense,spAttack,spDefense,speed,total,flavortext;
-    Button websearchbutton;
+    //Context context;
+    private Pokedex pokedex = new Pokedex();
+    final ArrayList<Pokedex.Pokemon> pokemonsMaster = pokedex.getPokemon();
+
+    ImageView pokePics;
+    TextView pokeNames,pokeNums,pokeSpeciess,pokeHPs,pokeTypes;
+    TextView attacks,defenses,spAttacks,spDefenses,speeds,totals,flavortexts;
+    Button websearchbuttons;
+
+    String critterName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pokeprofile);
 
-        pokeName = (TextView) findViewById(R.id.attack);
-        pokeSpecies = (TextView)findViewById(R.id.pokeSpecies);
-        pokeHP = (TextView) findViewById(R.id.pokeHP);
-        pokeType = (TextView) findViewById(R.id.pokeType);
+        //using the pokemon position, make a pokemon object
+        Intent intent = getIntent();
+        critterName = intent.getStringExtra("Name");
+        //use that pokemon's information and values to set everything for the profile
+        int theIndex = 0;// = pokemonsMaster.indexOf(critterName);
+        for(int i = 0; i < pokemonsMaster.size();i++)
+        {
+            String names = pokemonsMaster.get(i).name;
+            if (critterName.equals(names)){
+                theIndex = i;
+                break;
+            }
+        }
+        Pokedex.Pokemon ourPokemon = pokemonsMaster.get(theIndex);
 
-        attack = (TextView) findViewById(R.id.attack);
-        defense = (TextView)
+        //critterName = "TJHSST";//the pokemon's name; used for web searching
+
+        pokePics = (ImageView) findViewById(R.id.pokePic);
+        //String portraitString = "http://assets.pokemon.com/assets/cms2/img/pokedex/full/" + (ourPokemon).number +".png";
+        //Glide.with(context).load(portraitString).into(pokePics);
+
+        pokeNames = (TextView) findViewById(R.id.pokeName);
+        pokeNames.setText(ourPokemon.name);
+
+        pokeNums = (TextView) findViewById(R.id.pokeNum);
+        pokeNums.setText("#" + ourPokemon.number);
+
+        pokeSpeciess = (TextView)findViewById(R.id.pokeSpecies);
+        pokeSpeciess.setText(ourPokemon.species.toString());
+
+        pokeHPs = (TextView) findViewById(R.id.pokeHP);
+        pokeHPs.setText("HP: " + ourPokemon.hp.toString());
+
+        pokeTypes = (TextView) findViewById(R.id.pokeType);
+        String[] thearray = ourPokemon.type;
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i <thearray.length; i++)
+        {
+            builder.append(thearray[i] + ", ");
+        }
+        String built = builder.substring(0,builder.length()-2);
+        pokeTypes.setText("Type:" + built.toString());
+
+        attacks = (TextView) findViewById(R.id.attack);
+        attacks.setText("Attack: " + ourPokemon.attack.toString());
+
+        defenses = (TextView) findViewById(R.id.defense);
+        defenses.setText("Defense: " + ourPokemon.defense.toString());
+        //else hide
+
+        spAttacks = (TextView) findViewById(R.id.spAttack);
+        spAttacks.setText("Special Attacks: None");
+        //else hide
+
+        spDefenses = (TextView) findViewById(R.id.spDefense);
+        spDefenses.setText("Special Defenses: None");
+        //else hide
+
+        speeds = (TextView) findViewById(R.id.speed);
+        speeds.setText("Speed: Unknown");
+        //else hide
+
+        totals = (TextView) findViewById(R.id.total);
+        totals.setText("Totals: Unknown");
+        //else hide
+
+        flavortexts = (TextView) findViewById(R.id.flavortext);
+        flavortexts.setText("Flavor Text is unknown at this time");
+        //else hide
+
+        websearchbuttons = (Button) findViewById(R.id.websearchbutton);
+
+        websearchbuttons.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                //Context context = view.getContext();
+                //int duration = Toast.LENGTH_SHORT;
+                //CharSequence text = "hello there pokemon profile";
+                //Toast toast = Toast.makeText(context, critterName, duration);
+                //toast.show();
+                openWebPage("https://www.google.com/#q="+critterName);
+            }
+        });
+    }
+
+    public void openWebPage(String url)
+    {
+        Uri webpage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+        if (intent.resolveActivity(getPackageManager()) != null)
+        {
+            startActivity(intent);
+        }
     }
 }
 
 /****
- timeText = (TextView)findViewById(R.id.timerTime);
- exitButton = (Button) findViewById(R.id.exitButton);
-
  random = new Random();
-
  memberPic = (ImageView) findViewById(R.id.memberPic);
-
- buttonAnswer1 = (Button) findViewById(R.id.choice1);
- buttonAnswer2 = (Button) findViewById(R.id.choice2);
- buttonAnswer3 = (Button) findViewById(R.id.choice3);
- buttonAnswer4 = (Button) findViewById(R.id.choice4);
-
  scoreChanger = (TextView) findViewById(R.id.scoreNum);
- updateScore(score);
-
- pairs = new ArrayList<>();
+  pairs = new ArrayList<>();
  ImgNameDatabase imgNameDatabase = new ImgNameDatabase();
-
- //adding image and name pairs to list
- for (int i = 0; i < imgNameDatabase.cNames.length; i++) {
- pairs.add(new ImgNamePairs(imgNameDatabase.cNames[i], imgNameDatabase.memberImages[i]));
- }
-
- //randomize the pairing order
-
- Collections.shuffle(pairs);
-
- createQuestion(turn);
- timer.start(); //THIS IS THE LINE WHERE EVERYTHING BREAKS FOR SOME REASON
-
-
 
  exitButton.setOnClickListener(new View.OnClickListener(){
  @Override
@@ -77,131 +158,7 @@ public class PokeProfile extends AppCompatActivity
  Intent intentReturn = new Intent(getApplicationContext(), StartScreen.class);
  startActivity(intentReturn); //returns to the start screen
  }
-
  });
-
- builder2.setNegativeButton("Nope", new DialogInterface.OnClickListener() {
-
- @Override
-
- public void onClick(DialogInterface dialog, int which) {
- dialog.dismiss();
- finish();
- }
-
- });
-
- builder2.show();
-
- /*AlertDialog alertDialog = new AlertDialog.Builder(GameScreen.this).create();
- alertDialog.setTitle("Are you sure you want to quit?");
- alertDialog.setMessage("All progress will be lost.");
- alertDialog.setButton(1, "Yes!", new DialogInterface.OnClickListener()
- {
- @Override
- public void onClick(DialogInterface dialog, int id)
- {
- Toast.makeText(GameScreen.this, "Thank You!", Toast.LENGTH_SHORT).show();
- Intent intentReturn = new Intent(getApplicationContext(), StartScreen.class);
- startActivity(intentReturn); //returns to the start screen
- }
- });
- alertDialog.setButton(0, "Cancel", new DialogInterface.OnClickListener()
- {
- @Override
- public void onClick(DialogInterface dialog, int id)
- {
- dialog.dismiss();
- finish();//close the dialog window without doing anything
- }
- }
- );
- alertDialog.show();*/
-            }
-                    });
-
-
-                    memberPic.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-        timer.cancel(); //don't penalize the player for creating a contact
-        //Creates a new Intent to insert a new contact
-        Intent contactIntent = new Intent(ContactsContract.Intents.Insert.ACTION);
-        contactIntent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
-        // Gets the name of the currently displayed member
-        String memName = pairs.get(turn - 1).getMemberName();
-        // Executes the new contact creation
-        contactIntent.putExtra(ContactsContract.Intents.Insert.NAME, memName);
-        startActivityForResult(contactIntent, 1);
-        }
-        });
-
-        buttonAnswer1.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-        //check correctness of answer, first check wrong then right
-        timer.cancel();
-        if (!(buttonAnswer1.getText().toString().equalsIgnoreCase(pairs.get(turn - 1).getMemberName()))) {
-        Toast.makeText(GameScreen.this, "Wrong Answer :(", Toast.LENGTH_SHORT).show();
-        if (turn < pairs.size()) {
-        turn ++;
-        createQuestion(turn);
-        timer.start();
-        } else {
-        Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
-        }
-
-        } else {
-
-        score ++;
-        updateScore(score);
-
-        if (turn < pairs.size()) {
-        turn ++;
-        createQuestion(turn);
-        timer.start();
-        } else {
-        Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
-
-        }
-
-        }
-        }
-        });
-
-        buttonAnswer2.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-        timer.cancel();
-        //check correctness of answer, first check wrong then right
-        if (!(buttonAnswer2.getText().toString().equalsIgnoreCase(pairs.get(turn - 1).getMemberName()))) {
-        Toast.makeText(GameScreen.this, "Wrong Answer :(", Toast.LENGTH_SHORT).show();
-
-        if (turn < pairs.size()) {
-        turn ++;
-        createQuestion(turn);
-        timer.start();
-        } else {
-        Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
-        }
-
-        } else {
-
-        score ++;
-        updateScore(score);
-
-        if (turn < pairs.size()) {
-        turn ++;
-        createQuestion(turn);
-        timer.start();
-        } else {
-        Toast.makeText(GameScreen.this, "Congrats! You've Finished!", Toast.LENGTH_SHORT).show();
-        }
-
-        }
-        }
-        });
-
         buttonAnswer3.setOnClickListener(new View.OnClickListener() {
 @Override
 public void onClick(View view) {

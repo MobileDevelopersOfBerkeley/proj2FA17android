@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TypeFilter"></activity>
+        <activity android:name=".PokeProfile"></activity>
     </application>
 
 </manifest>

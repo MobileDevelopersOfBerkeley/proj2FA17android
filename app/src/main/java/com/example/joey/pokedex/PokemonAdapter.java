@@ -47,13 +47,19 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonL
             @Override
             public void onClick(View v)
             {
-                Context context = v.getContext();
-                int duration = Toast.LENGTH_SHORT;
-                CharSequence text = "hello";
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                String name = holder.pokemonName.getText().toString();
                 Intent intentProfile = new Intent(v.getContext(),PokeProfile.class);
-                startActivity(intentProfile);
+                //intentProfile.putParcelableArrayListExtra("PokemonList",pokemons);
+                //intentProfile.putExtra("PokemonIndex",pokemons.indexOf(this));
+                //pass to the intent the pokemons list
+                //pass to the intent the pokemon's position
+                intentProfile.putExtra("Name",name);
+                //Context context = v.getContext();
+                //int duration = Toast.LENGTH_SHORT;
+                //CharSequence text = "hello there click pokemon";
+                //Toast toast = Toast.makeText(context, name, duration);
+                //toast.show();
+                context.startActivity(intentProfile);
             }
         });
         //return
@@ -85,5 +91,4 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonL
         }
 
     }
-
 }
