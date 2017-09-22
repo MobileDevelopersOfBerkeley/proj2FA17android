@@ -55,8 +55,6 @@ public class CategorySearch extends AppCompatActivity implements View.OnClickLis
             public void onClick(DialogInterface dialog, int which) {
                 String answer = min_atk.getText().toString();
                 fil_list = filtered_list(answer, "Attack");
-                Intent display_screen = new Intent (getApplicationContext(), GridDisplay.class);
-                startActivity(display_screen);
             }
         });
         atk.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -78,8 +76,6 @@ public class CategorySearch extends AppCompatActivity implements View.OnClickLis
             public void onClick(DialogInterface dialog, int which) {
                 String answer = min_def.getText().toString();
                 fil_list = filtered_list(answer, "Defense");
-                Intent display_screen = new Intent (getApplicationContext(), GridDisplay.class);
-                startActivity(display_screen);
             }
         });
         def.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -101,8 +97,6 @@ public class CategorySearch extends AppCompatActivity implements View.OnClickLis
             public void onClick(DialogInterface dialog, int which) {
                 String answer = min_hp.getText().toString();
                 fil_list = filtered_list(answer, "HP");
-                Intent display_screen = new Intent (getApplicationContext(), GridDisplay.class);
-                startActivity(display_screen);
             }
         });
         hp.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

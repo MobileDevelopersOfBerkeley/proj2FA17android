@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:title="Search"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/search_poke"
+        android:title="Search By:"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/random_poke"
+        android:title="Random"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/type_poke"
+        android:title="Type"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/def_poke"
+        android:title="Defense"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/attack_poke"
+        android:title="Attack"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/hp_poke"
+        android:title="HP"
+        app:showAsAction="never"/>
+</menu>

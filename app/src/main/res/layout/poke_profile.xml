@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2a5366">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/white"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/pokePic"
+        android:layout_width="119dp"
+        android:layout_height="113dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/attack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="60dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokePic"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/defense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="60dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/attack"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/hp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="60dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/defense"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/species"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="60dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hp"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/web_search"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Search Web"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/species"
+        android:textColor="@android:color/white"/>
+
+</android.support.constraint.ConstraintLayout>

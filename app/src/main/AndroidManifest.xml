@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".CategorySearch" />
         <activity android:name=".TypeMenu"/>
-
+        <activity android:name=".PokeProfile"/>
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     </application>
 </manifest>
