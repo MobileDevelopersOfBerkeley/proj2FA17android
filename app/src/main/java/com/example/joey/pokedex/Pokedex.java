@@ -41,6 +41,11 @@ public class Pokedex {
         String hp;
         String species;
         String[] type;
+        String flavorText;
+        String speed;
+        String spAttack;
+        String spDefense;
+        String total;
 
         public Pokemon(String name, JSONObject jsonData){
             try {
@@ -53,6 +58,11 @@ public class Pokedex {
                 String typesParse = new String(jsonData.getString("Type"));
                 typesParse = typesParse.substring(1, typesParse.length()-1).replace("\"", "").toLowerCase().replaceAll("\\s+","");
                 type = typesParse.split(",");
+                flavorText = jsonData.getString("FlavorText");
+                speed = jsonData.getString("Speed");
+                spAttack = jsonData.getString("Sp. Atk");
+                spDefense = jsonData.getString("Sp. Def");
+                total = jsonData.getString("Total");
 
             } catch (JSONException e) {
                 Log.i("JSON error", "error parsing json data");

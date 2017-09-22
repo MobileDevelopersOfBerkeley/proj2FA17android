@@ -80,7 +80,7 @@ public class PokeProfile extends AppCompatActivity
             builder.append(thearray[i] + ", ");
         }
         String built = builder.substring(0,builder.length()-2);
-        pokeTypes.setText("Type:" + built.toString());
+        pokeTypes.setText("Type: " + built.toString());
 
         attacks = (TextView) findViewById(R.id.attack);
         attacks.setText("Attack: " + ourPokemon.attack.toString());
@@ -90,23 +90,23 @@ public class PokeProfile extends AppCompatActivity
         //else hide
 
         spAttacks = (TextView) findViewById(R.id.spAttack);
-        spAttacks.setText("Special Attacks: None");
+        spAttacks.setText("Special Attack: " + ourPokemon.spAttack.toString());
         //else hide
 
         spDefenses = (TextView) findViewById(R.id.spDefense);
-        spDefenses.setText("Special Defenses: None");
+        spDefenses.setText("Special Defense: " + ourPokemon.spDefense.toString());
         //else hide
 
         speeds = (TextView) findViewById(R.id.speed);
-        speeds.setText("Speed: Unknown");
+        speeds.setText("Speed: " + ourPokemon.speed.toString());
         //else hide
 
         totals = (TextView) findViewById(R.id.total);
-        totals.setText("Totals: Unknown");
+        totals.setText("Totals: " + ourPokemon.total.toString());
         //else hide
 
         flavortexts = (TextView) findViewById(R.id.flavortext);
-        flavortexts.setText("Flavor Text is unknown at this time");
+        flavortexts.setText("Flavor Text: " + ourPokemon.flavorText.toString());
         //else hide
 
         websearchbuttons = (Button) findViewById(R.id.websearchbutton);
