@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class PokeProfile extends AppCompatActivity
 {
-    //Context context;
+    Context context;
     private Pokedex pokedex = new Pokedex();
     final ArrayList<Pokedex.Pokemon> pokemonsMaster = pokedex.getPokemon();
 
@@ -57,8 +57,8 @@ public class PokeProfile extends AppCompatActivity
         //critterName = "TJHSST";//the pokemon's name; used for web searching
 
         pokePics = (ImageView) findViewById(R.id.pokePic);
-        //String portraitString = "http://assets.pokemon.com/assets/cms2/img/pokedex/full/" + (ourPokemon).number +".png";
-        //Glide.with(context).load(portraitString).into(pokePics);
+        String portraitString = "http://assets.pokemon.com/assets/cms2/img/pokedex/full/" + (ourPokemon).number +".png";
+        Glide.with(getApplicationContext()).load(portraitString).into(pokePics);
 
         pokeNames = (TextView) findViewById(R.id.pokeName);
         pokeNames.setText(ourPokemon.name);
