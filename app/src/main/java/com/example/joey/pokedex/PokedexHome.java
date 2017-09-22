@@ -1,6 +1,7 @@
 package com.example.joey.pokedex;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -36,6 +37,7 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
     public ArrayList<String> allowedTypes = new ArrayList<String>(allowedTypesMaster);
     private int apcutoff, hpcutoff, dpcutoff = 0;
     private boolean listLayout = true;
+    private Menu menu;
 
 
     @Override
@@ -88,11 +90,14 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
     public void switchView(){
         if(listLayout){
             pokemonList.setLayoutManager(pokemonListLinearLayout);
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, android.R.drawable.ic_dialog_dialer));
+
         }else{
             pokemonList.setLayoutManager(pokemonListGridLayout);
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, android.R.drawable.ic_menu_sort_by_size));
+
         }
     }
-
 
     @Override
     protected void onResume() {
@@ -121,6 +126,7 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
         pokemonListAdapter.pokemons.clear();
         pokemonListAdapter.pokemons.addAll(newPokemons);
         pokemonListAdapter.notifyDataSetChanged();
+
     }
 
     /*
@@ -133,6 +139,7 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
         final MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
+        this.menu = menu;
         return true;
     }
 
@@ -147,7 +154,6 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
                 }
                 switchView();
                 pokemonListAdapter.notifyDataSetChanged();
-                Log.d("CREATION", "ButtonPressed");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -171,11 +177,17 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
             if(pokemon.name.toLowerCase().startsWith(nameQuery.toLowerCase())){
                 newPokemons.add(pokemon);
             }
-            if(pokemon.number.equals(nameQuery)){
+            if(pokemon.number.replace("0", "").equals(nameQuery)){
                 newPokemons.add(pokemon);
             }
         }
-        newPokemons = updatePokemonListByType(newPokemons);
+        newPokemons = updatePokemonListByType(updatePokemonListByPoints(newPokemons));
+        if (newPokemons.size() == 1 && (newPokemons.get(0).name.equals(nameQuery) || newPokemons.get(0).number.replace("0","").equals(nameQuery))){
+            String name = newPokemons.get(0).name;
+            Intent openProfile = new Intent(getApplicationContext(), PokeProfile.class);
+            openProfile.putExtra("Name", name);
+            startActivity(openProfile);
+        }
         pushNewPokemonList(newPokemons);
     }
 

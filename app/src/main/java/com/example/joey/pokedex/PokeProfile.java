@@ -6,6 +6,7 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -116,15 +117,11 @@ public class PokeProfile extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                //Context context = view.getContext();
-                //int duration = Toast.LENGTH_SHORT;
-                //CharSequence text = "hello there pokemon profile";
-                //Toast toast = Toast.makeText(context, critterName, duration);
-                //toast.show();
                 openWebPage("https://www.google.com/#q="+critterName);
             }
         });
     }
+
 
     public void openWebPage(String url)
     {
@@ -137,95 +134,3 @@ public class PokeProfile extends AppCompatActivity
     }
 }
 
-/****
- random = new Random();
- memberPic = (ImageView) findViewById(R.id.memberPic);
- scoreChanger = (TextView) findViewById(R.id.scoreNum);
-  pairs = new ArrayList<>();
- ImgNameDatabase imgNameDatabase = new ImgNameDatabase();
-
- exitButton.setOnClickListener(new View.OnClickListener(){
- @Override
- public void onClick(View view) {
-
- AlertDialog.Builder builder2=new AlertDialog.Builder(GameScreen.this);
- builder2.setMessage("Are you sure you want to quit?");
- builder2.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-
- @Override
- public void onClick(DialogInterface dialog, int which) {
- Toast.makeText(getApplicationContext(), "Thanks for Playing!", Toast.LENGTH_LONG).show();
- Intent intentReturn = new Intent(getApplicationContext(), StartScreen.class);
- startActivity(intentReturn); //returns to the start screen
- }
- });
-        buttonAnswer3.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-        timer.cancel();
-        //check correctness of answer, first check wrong then right
-        if (!(buttonAnswer3.getText().toString().equalsIgnoreCase(pairs.get(turn - 1).getMemberName()))) {
-        Toast.makeText(GameScreen.this, "Wrong Answer :(", Toast.LENGTH_SHORT).show();
-
-        if (turn < pairs.size()) {
-        turn ++;
-        createQuestion(turn);
-        timer.start();
-        } else {
-        Collections.shuffle(pairs);
-        turn = 1;
-        }
-
-        } else {
-
-        score ++;
-        updateScore(score);
-
-        if (turn < pairs.size()) {
-        turn ++;
-        createQuestion(turn);
-        timer.start();
-        } else {
-        Collections.shuffle(pairs);
-        turn = 1;
-        }
-
-        }
-        }
-        });
-
-        buttonAnswer4.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-        //check correctness of answer, first check wrong then right
-        if (!(buttonAnswer4.getText().toString().equalsIgnoreCase(pairs.get(turn - 1).getMemberName()))) {
-        Toast.makeText(GameScreen.this, "Wrong Answer :(", Toast.LENGTH_SHORT).show();
-
-        if (turn < pairs.size()) {
-        turn ++;
-        createQuestion(turn);
-        timer.start();
-        } else {
-        Collections.shuffle(pairs);
-        turn = 1;
-        }
-
-        } else {
-
-        score ++;
-        updateScore(score);
-
-        if (turn < pairs.size()) {
-        turn ++;
-        createQuestion(turn);
-        timer.start();
-        } else {
-        Collections.shuffle(pairs);
-        turn = 1;
-        }
-
-        }
-        }
-        });
-
-***/
