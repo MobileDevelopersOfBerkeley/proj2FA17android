@@ -146,7 +146,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="83dp"
         android:layout_marginTop="0dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@android:color/holo_red_dark"
         android:text="Fighting"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fairyCheckBox"/>
@@ -180,7 +180,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="83dp"
         android:layout_marginTop="-7dp"
-        android:background="@color/colorAccent"
+        android:background="@android:color/darker_gray"
         android:text="Ghost"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flyingCheckBox"/>
@@ -305,7 +305,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
-        android:background="@color/acoompany2"
+        android:background="@android:color/holo_blue_bright"
         android:text="Water"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

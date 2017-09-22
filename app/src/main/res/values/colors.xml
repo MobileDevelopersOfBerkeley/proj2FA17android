@@ -10,7 +10,7 @@
     <color name="combinationCoSecondary">#b4f53a</color>
     <color name="combinationTriSecondary">#5ff086</color>
     <color name="accompnay1">#9575CD</color>
-    <color name="acoompany2">#7e6ff2</color>
+    <color name="acoompany2">#a16872</color>
     <color name="accompany3">#bfe0f1</color>
     <color name="accompany4">#B388FF</color>
     <color name="accompany5">#673AB7</color>
@@ -23,6 +23,6 @@
     <color name="serial4">#AEEA00</color>
     <color name="serial5">#B2FF59</color>
     <color name="serial6">#76FF03</color>
-    <color name="serial7">#a6d5f9</color>
+    <color name="serial7">#55a9ea</color>
 
 </resources>
