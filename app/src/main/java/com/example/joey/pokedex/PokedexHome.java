@@ -3,6 +3,7 @@ package com.example.joey.pokedex;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -22,7 +23,8 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
     static final int POINT_REQUEST = 6;
     private RecyclerView pokemonList;
     private PokemonAdapter pokemonListAdapter;
-    private RecyclerView.LayoutManager pokemonListLayout;
+    private RecyclerView.LayoutManager pokemonListLinearLayout, pokemonListGridLayout;
+
     private Pokedex pokedex = new Pokedex();
     final private ArrayList<Pokedex.Pokemon> pokemonsMaster = pokedex.getPokemon();
     private Button typeFilterButton;
@@ -33,6 +35,7 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
             "dragon", "dark", "fairy"));
     public ArrayList<String> allowedTypes = new ArrayList<String>(allowedTypesMaster);
     private int apcutoff, hpcutoff, dpcutoff = 0;
+    private boolean listLayout = true;
 
 
     @Override
@@ -42,8 +45,10 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
 
         //init the Pokemon List View
         pokemonList = (RecyclerView) findViewById(R.id.pokemonList);
-        pokemonListLayout = new LinearLayoutManager(this);
-        pokemonList.setLayoutManager(pokemonListLayout);
+        pokemonListLinearLayout = new LinearLayoutManager(this);
+        pokemonListGridLayout = new GridLayoutManager(this, 2);
+
+        pokemonList.setLayoutManager(pokemonListLinearLayout);
 
         pokemonListAdapter = new PokemonAdapter(getApplicationContext(), pokemonsMaster);
         pokemonList.setAdapter(pokemonListAdapter);
@@ -80,6 +85,15 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
             }
         });
     }
+
+    public void switchView(){
+        if(listLayout){
+            pokemonList.setLayoutManager(pokemonListLinearLayout);
+        }else{
+            pokemonList.setLayoutManager(pokemonListGridLayout);
+        }
+    }
+
 
     @Override
     protected void onResume() {
@@ -121,6 +135,24 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
         final SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.swithLayout:
+                if(listLayout){
+                    listLayout = false;
+                }else{
+                    listLayout = true;
+                }
+                switchView();
+                pokemonListAdapter.notifyDataSetChanged();
+                Log.d("CREATION", "ButtonPressed");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
