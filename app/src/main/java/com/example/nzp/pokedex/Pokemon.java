@@ -13,10 +13,14 @@ import org.json.JSONObject;
 
 public class Pokemon {
 
-    public enum Type {
-        BUG, DARK, DRAGON, ELECTRIC, FAIRY, FIGHTING, FIRE, FLYING, GHOST, GRASS,
-        GROUND, ICE, NORMAL, POISON, PSYCHIC, ROCK, STEEL, WATER
-    }
+    public static final String[] TYPES = {
+            "Bug", "Dark", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost",
+            "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"
+    };
+    public static final int NUM_TYPES = TYPES.length;
+    public static final int HIGHEST_ATK = 180;
+    public static final int HIGHEST_DEF = 230;
+    public static final int HIGHEST_HP = 255;
 
     String name;
     String number;
@@ -29,7 +33,7 @@ public class Pokemon {
     String typeProfile;
     String speed;
     String total;
-    Type[] type;
+    String[] type;
 
     public Pokemon(String name, JSONObject jsonData) {
         try {
@@ -48,11 +52,9 @@ public class Pokemon {
 
             //Additional code to support types
             String types = jsonData.getString("Type").trim();
-            String[] typeString = types.substring(1, types.length() - 1).split(","); //split into array of type strings
-            type = new Type[typeString.length];
-            for (int i = 0; i < typeString.length; i += 1) {
-                typeString[i] = typeString[i].substring(1, typeString[i].length() - 1); //remove "" around each type string
-                type[i] = Type.valueOf(typeString[i].toUpperCase()); //convert each string to type and add to array
+            type = types.substring(1, types.length() - 1).split(","); //split into array of type strings
+            for (int i = 0; i < type.length; i += 1) {
+                type[i] = type[i].substring(1, type[i].length() - 1); //remove "" around each type string
             }
 
         } catch (JSONException e) {

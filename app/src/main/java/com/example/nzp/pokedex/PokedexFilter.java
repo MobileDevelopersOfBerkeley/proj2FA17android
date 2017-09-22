@@ -1,9 +1,9 @@
 package com.example.nzp.pokedex;
 
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import static com.example.nzp.pokedex.Pokemon.Type;
+import static com.example.nzp.pokedex.Pokemon.NUM_TYPES;
 
 /**
  * Created by nzp on 9/19/17.
@@ -15,17 +15,15 @@ import static com.example.nzp.pokedex.Pokemon.Type;
 
 public class PokedexFilter {
 
-    public static final Set<Pokemon.Type> ALL_TYPES = EnumSet.allOf(Type.class);
-
-    private Set<Pokemon.Type> allowedTypes;
+    private ArrayList<String> allowedTypes;
     private int minAtk, minDef, minHP;
 
     /* Empty constructor filters nothing. */
     public PokedexFilter() {
-        this(ALL_TYPES, 0, 0, 0);
+        this(new ArrayList<>(Arrays.asList(Pokemon.TYPES)), 0, 0, 0);
     }
 
-    public PokedexFilter(Set<Pokemon.Type> allowedTypes, int minAtk, int minDef, int minHP) {
+    public PokedexFilter(ArrayList<String> allowedTypes, int minAtk, int minDef, int minHP) {
         this.allowedTypes = allowedTypes;
         this.minAtk = minAtk;
         this.minDef = minDef;
@@ -44,32 +42,35 @@ public class PokedexFilter {
         return minHP;
     }
 
-    public Set<Pokemon.Type> getAllowedTypes() {
+    public ArrayList<String> getAllowedTypes() {
         return allowedTypes;
     }
 
     @Override
     public String toString() {
+        //If no filter, there is no string representation
         StringBuilder builder = new StringBuilder();
         boolean atkFiltered = getMinAtk() > 0;
         boolean defFiltered = getMinDef() > 0;
         boolean hpFiltered = getMinHP() > 0;
         int numTypes = getAllowedTypes().size();
+        int numFilteredStats = (atkFiltered ? 1 : 0) + (defFiltered ? 1 : 0) + (hpFiltered ? 1 : 0);
 
         //Type filters
         if (numTypes == 0) {
             builder.append("Showing no types");
         } else if (numTypes == 1) {
-            String type = getAllowedTypes().iterator().next().name();
-            type = type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase();
+            String type = getAllowedTypes().get(0);
             builder.append("Showing ").append(type).append(" types");
-        } else if (numTypes == ALL_TYPES.size()) {
+        } else if (numTypes == 2 && numFilteredStats < 2) {
+            builder.append("Showing ").append(getAllowedTypes().get(0))
+                    .append(" and ").append(getAllowedTypes().get(1)).append(" types");
+        } else if (numTypes == NUM_TYPES) {
             builder.append("Showing all types");
         } else {
             builder.append("Showing ").append(numTypes).append(" types");
         }
 
-        int numFilteredStats = (atkFiltered ? 1 : 0) + (defFiltered ? 1 : 0) + (hpFiltered ? 1 : 0);
 
         //Handle ATK, DEF, and HP filters
         if (numFilteredStats == 3) { //all 3 are true
@@ -85,6 +86,11 @@ public class PokedexFilter {
         }
 
         builder.append(".");
+
+        if (builder.toString().equals("Showing all types.")) {
+            return null;
+        }
         return builder.toString();
     }
+
 }

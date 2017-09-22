@@ -2,13 +2,9 @@ package com.example.nzp.pokedex;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,13 +12,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PokemonDisplay extends AppCompatActivity {
 
@@ -87,7 +78,7 @@ public class PokemonDisplay extends AppCompatActivity {
         specialDefense.setText(list.get(i).specialDefense);
         speed.setText(list.get(i).speed);
         total.setText(list.get(i).total);
-        type.setText(list.get(i).typeProfile);
+        type.setText(Arrays.toString(list.get(i).type));
 
         //display the image of the pokemon
         String filename = "http://assets.pokemon.com/assets/cms2/img/pokedex/full/" + list.get(i).number + ".png";

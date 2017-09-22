@@ -12,9 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Button;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //Filter view variables
     private View filterInfoView;
-    private ImageView removeFilterImage;
     private TextView filterText;
 
     @Override
@@ -46,9 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Filtering stuff
         filterInfoView = findViewById(R.id.filterInfoView);
-        removeFilterImage = (ImageView) findViewById(R.id.removeFilterImage);
         filterText = (TextView) findViewById(R.id.filterText);
         filterInfoView.setVisibility(View.GONE);
+        ImageView removeFilterImage = (ImageView) findViewById(R.id.removeFilterImage);
         removeFilterImage.setOnClickListener(this);
 
     }
@@ -129,15 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.filterButton:
                 startActivityForResult(new Intent(this, FilterActivity.class), 1);
-                /*
-                //TODO: Filter screen that properly calls adapter.filterPokemon and updates text.
-                HashSet<Pokemon.Type> testSet = new HashSet<>();
-                testSet.add(Pokemon.Type.ELECTRIC);
-                PokedexFilter filter = new PokedexFilter(testSet, 30, 0, 0);
-                adapter.filterPokemon(filter);
-                setFilterText(filter.toString());
-                clearSearch();
-                */
                 break;
             case R.id.searchButton:
                 setSearch();
@@ -157,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /* Receiving from filtering activity */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -165,9 +155,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int atk = data.getIntExtra("atk", -1);
                 int def = data.getIntExtra("def", -1);
                 int hp = data.getIntExtra("hp", -1);
-                HashSet<Pokemon.Type> testSet = new HashSet<>();
-                testSet.add(Pokemon.Type.ELECTRIC);
-                PokedexFilter filter = new PokedexFilter(testSet, atk, def, hp);
+                ArrayList<String> allowedTypes = data.getStringArrayListExtra("types");
+                PokedexFilter filter = new PokedexFilter(allowedTypes, atk, def, hp);
                 adapter.filterPokemon(filter);
                 setFilterText(filter.toString());
                 clearSearch();
