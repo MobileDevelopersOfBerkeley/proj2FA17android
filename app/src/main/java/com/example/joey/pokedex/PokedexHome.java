@@ -65,11 +65,20 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
             @Override
             public void onClick(View view) {
                 Intent pointOptions = new Intent(getApplicationContext(), PointFilter.class);
+                pointOptions.putExtra("apcutoff", "" + apcutoff);
+                pointOptions.putExtra("hpcutoff", "" + hpcutoff);
+                pointOptions.putExtra("dpcutoff", "" + dpcutoff);
                 startActivityForResult(pointOptions, POINT_REQUEST);
             }
 
         });
 
+        randomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pushNewPokemonList(createRandomPokemons(20));
+            }
+        });
     }
 
     @Override
@@ -88,7 +97,6 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
         }
         if(requestCode == POINT_REQUEST){
             if(resultCode == RESULT_OK){
-                Log.d("CREATION", "data is" + data.getStringExtra("hpcutoff"));
                 apcutoff = Integer.parseInt(data.getStringExtra("apcutoff"));
                 hpcutoff = Integer.parseInt(data.getStringExtra("hpcutoff"));
                 dpcutoff = Integer.parseInt(data.getStringExtra("dpcutoff"));
@@ -154,20 +162,31 @@ public class PokedexHome extends AppCompatActivity implements SearchView.OnQuery
                 newPokemons.add(pokemon);
             }
         }
-        Log.d("CREATION", newPokemons.toString());
         return newPokemons;
     }
 
     public ArrayList<Pokedex.Pokemon> updatePokemonListByPoints(ArrayList<Pokedex.Pokemon> pokemons){
+        ArrayList<Pokedex.Pokemon> newPokemons = new ArrayList<Pokedex.Pokemon>();
         for(Pokedex.Pokemon pokemon : pokemons){
-            if(Integer.parseInt(pokemon.attack) < apcutoff ||
-                    Integer.parseInt(pokemon.defense) <dpcutoff ||
-                    Integer.parseInt(pokemon.hp) < hpcutoff){
-                pokemons.remove(pokemon);
+            if(Integer.parseInt(pokemon.attack) > apcutoff &&
+                    Integer.parseInt(pokemon.defense) > dpcutoff &&
+                    Integer.parseInt(pokemon.hp) > hpcutoff){
+                newPokemons.add(pokemon);
             }
 
         }
-        return pokemons;
+        return newPokemons;
+    }
+
+    public ArrayList<Pokedex.Pokemon> createRandomPokemons(int numMons){
+        ArrayList<Pokedex.Pokemon> newPokemons = new ArrayList<Pokedex.Pokemon>();
+        ArrayList<Pokedex.Pokemon> copyMaster = new ArrayList<>(pokemonsMaster);
+        for(int i = 0; i < numMons; i++){
+            int rand = (int) (Math.random()*copyMaster.size());
+            newPokemons.add(copyMaster.get(rand));
+            copyMaster.remove(rand);
+        }
+        return newPokemons;
     }
 
 }

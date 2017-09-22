@@ -21,6 +21,17 @@ public class PointFilter extends AppCompatActivity {
         editHP = (EditText) findViewById(R.id.healthPointsInput);
         editDP = (EditText) findViewById(R.id.defensePointsInput);
 
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        editAP.setText(getIntent().getStringExtra("apcutoff"));
+        editHP.setText(getIntent().getStringExtra("hpcutoff"));
+        editDP.setText(getIntent().getStringExtra("dpcutoff"));
+
     }
 
     @Override
