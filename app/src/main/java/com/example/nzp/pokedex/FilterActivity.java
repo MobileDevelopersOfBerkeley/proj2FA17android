@@ -54,13 +54,11 @@ public class FilterActivity extends AppCompatActivity implements SeekBar.OnSeekB
         checkBoxes = new CheckBox[Pokemon.NUM_TYPES];
         for (int i = 0; i < checkBoxes.length; i += 1) {
             checkBoxes[i] = (CheckBox) (findViewById(checkBoxIds[i]));
-            checkBoxes[i].setChecked(true);
         }
 
         //Check all and save button
         checkAll = (CheckBox) (findViewById(R.id.checkAll));
         saveButton = (Button) (findViewById(R.id.saveButton));
-        checkAll.setChecked(true);
         checkAll.setOnClickListener(this);
         saveButton.setOnClickListener(this);
     }

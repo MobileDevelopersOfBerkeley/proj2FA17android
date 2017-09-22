@@ -30,7 +30,6 @@ public class Pokemon {
     String species;
     String specialAttack;
     String specialDefense;
-    String typeProfile;
     String speed;
     String total;
     String[] type;
@@ -45,7 +44,6 @@ public class Pokemon {
             species = jsonData.getString("Species").trim();
             specialAttack = jsonData.getString("Sp. Atk").trim();
             specialDefense = jsonData.getString("Sp. Def").trim();
-            typeProfile = jsonData.getString("Type").trim();
             speed = jsonData.getString("Speed").trim();
             total = jsonData.getString("Total").trim();
 
@@ -55,6 +53,7 @@ public class Pokemon {
             type = types.substring(1, types.length() - 1).split(","); //split into array of type strings
             for (int i = 0; i < type.length; i += 1) {
                 type[i] = type[i].substring(1, type[i].length() - 1); //remove "" around each type string
+                type[i] = type[i].substring(0, 1).toUpperCase() + type[i].substring(1).toLowerCase();
             }
 
         } catch (JSONException e) {

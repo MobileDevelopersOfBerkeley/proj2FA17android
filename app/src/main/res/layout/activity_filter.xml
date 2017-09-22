@@ -100,7 +100,7 @@
         android:layout_marginTop="0dp"
         android:background="@color/cardview_dark_background"
         android:backgroundTint="@color/cardview_shadow_start_color"
-        android:text="Dark"
+        android:text="@string/dark"
         android:textColor="@android:color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bugCheckBox"/>
@@ -112,7 +112,7 @@
         android:layout_marginLeft="83dp"
         android:layout_marginTop="1dp"
         android:background="@android:color/holo_orange_light"
-        android:text="Dragon"
+        android:text="@string/dragon"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/darkCheckBox"/>
 
@@ -123,7 +123,7 @@
         android:layout_marginLeft="83dp"
         android:layout_marginTop="-8dp"
         android:background="@color/serial1"
-        android:text="Electric"
+        android:text="@string/electric"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dragonCheckBox"/>
 
@@ -136,7 +136,7 @@
         android:autofillHints="@color/accompany4"
         android:background="@color/accompany8"
         android:backgroundTint="@color/accompany4"
-        android:text="Fairy"
+        android:text="@string/fairy"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/electricCheckBox"/>
 
@@ -147,7 +147,7 @@
         android:layout_marginLeft="83dp"
         android:layout_marginTop="0dp"
         android:background="@color/colorPrimaryDark"
-        android:text="Fighting"
+        android:text="@string/fighting"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fairyCheckBox"/>
 
@@ -158,7 +158,7 @@
         android:layout_marginLeft="83dp"
         android:layout_marginTop="0dp"
         android:background="@android:color/holo_red_light"
-        android:text="Fire"
+        android:text="@string/fire"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fightingCheckBox"/>
 
@@ -170,7 +170,7 @@
         android:layout_marginTop="0dp"
         android:background="@android:color/holo_blue_bright"
         android:backgroundTint="@color/accompany3"
-        android:text="Flying"
+        android:text="@string/flying"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fireCheckBox"/>
 
@@ -181,7 +181,7 @@
         android:layout_marginLeft="83dp"
         android:layout_marginTop="-7dp"
         android:background="@color/colorAccent"
-        android:text="Ghost"
+        android:text="@string/ghost"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flyingCheckBox"/>
 
@@ -193,7 +193,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
         android:background="@color/combinationTriSecondary"
-        android:text="Grass"
+        android:text="@string/grass"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/bugCheckBox"
         app:layout_constraintRight_toRightOf="parent"
@@ -207,7 +207,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
         android:background="@color/combinationPrimary"
-        android:text="Ground"
+        android:text="@string/ground"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/darkCheckBox"
         app:layout_constraintRight_toRightOf="parent"
@@ -221,7 +221,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="-7dp"
         android:background="@color/serial7"
-        android:text="Ice"
+        android:text="@string/ice"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/dragonCheckBox"
         app:layout_constraintRight_toRightOf="parent"
@@ -235,7 +235,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="1dp"
         android:background="@color/serial2"
-        android:text="Normal"
+        android:text="@string/normal"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/electricCheckBox"
         app:layout_constraintRight_toRightOf="parent"
@@ -249,7 +249,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="-11dp"
         android:background="@color/accompnay1"
-        android:text="Poison"
+        android:text="@string/poison"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/fairyCheckBox"
         app:layout_constraintRight_toRightOf="parent"
@@ -263,7 +263,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
         android:background="@color/accompany8"
-        android:text="Psychic"
+        android:text="@string/psychic"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/fightingCheckBox"
         app:layout_constraintRight_toRightOf="parent"
@@ -277,7 +277,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
         android:background="@color/accompany6"
-        android:text="Rock"
+        android:text="@string/rock"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/fireCheckBox"
         app:layout_constraintRight_toRightOf="parent"
@@ -291,7 +291,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
         android:background="@color/accompany7"
-        android:text="Steel"
+        android:text="@string/steel"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/flyingCheckBox"
         app:layout_constraintRight_toRightOf="parent"
@@ -306,7 +306,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
         android:background="@color/acoompany2"
-        android:text="Water"
+        android:text="@string/water"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/ghostCheckBox"
@@ -318,7 +318,7 @@
         android:id="@+id/checkAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check All"
+        android:text="@string/check_all"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.997"
@@ -329,7 +329,7 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Choices"
+        android:text="@string/save_choices"
         android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@+id/checkAll"
         android:layout_marginLeft="8dp"
