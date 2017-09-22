@@ -279,7 +279,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/speAttackTitle"
             android:layout_toRightOf="@+id/tag5"
-            android:text="222"
             android:textColor="@android:color/black"
             android:textSize="18sp"/>
 
