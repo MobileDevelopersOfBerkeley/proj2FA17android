@@ -1,5 +1,5 @@
 # proj2FA17android
-Repository for Fall 2017 MDB Android Training Program Mini-Project 1 Submissions
+Repository for Fall 2017 MDB Android Training Program Mini-Project 2 Submissions
 
 Finalized mini-projects should be stored in personal portfolios, but this repository will be used for providing feedback on code quality using the GitHub code review features.
 
