@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class FilterActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
+public class FilterActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, View.OnClickListener {
 
     public static final int HIGHEST_ATK = 180;
     public static final int HIGHEST_DEF = 230;
@@ -15,6 +17,7 @@ public class FilterActivity extends AppCompatActivity implements SeekBar.OnSeekB
 
     SeekBar seekBarAtk, seekBarDef, seekBarHP;
     TextView minAtkText, minDefText, minHPText;
+    CheckBox bugCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +30,14 @@ public class FilterActivity extends AppCompatActivity implements SeekBar.OnSeekB
         seekBarAtk = (SeekBar) (findViewById(R.id.seekBarAtk));
         seekBarDef = (SeekBar) (findViewById(R.id.seekBarDef));
         seekBarHP = (SeekBar) (findViewById(R.id.seekBarHP));
+        bugCheckBox = (CheckBox) (findViewById(R.id.bugCheckBox));
         seekBarAtk.setMax(HIGHEST_ATK);
         seekBarDef.setMax(HIGHEST_DEF);
         seekBarHP.setMax(HIGHEST_HP);
         seekBarAtk.setOnSeekBarChangeListener(this);
         seekBarDef.setOnSeekBarChangeListener(this);
         seekBarHP.setOnSeekBarChangeListener(this);
+        bugCheckBox.setOnClickListener(this);
     }
 
     @Override
@@ -69,4 +74,12 @@ public class FilterActivity extends AppCompatActivity implements SeekBar.OnSeekB
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {}
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bugCheckBox:
+                break;
+        }
+    }
 }

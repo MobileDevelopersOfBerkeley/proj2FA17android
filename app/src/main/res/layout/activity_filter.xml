@@ -49,13 +49,13 @@
         android:layout_marginBottom="0dp" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/bugCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="CheckBox"
-        tools:layout_editor_absoluteX="122dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp" />
+        tools:layout_editor_absoluteX="122dp" />
 
     <TextView
         android:id="@+id/minDefText"
